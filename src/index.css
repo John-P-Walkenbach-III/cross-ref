@@ -1,0 +1,1231 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+/* A more robust box-sizing reset */
+html {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+:root {
+  --background-dark: #1a1a1a;
+  --text-light: #f0f0f0;
+  --accent-gold: #d4af37;
+  --button-text-dark: #212121;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  min-height: 100vh;
+  text-align: center;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  margin-bottom: 1.5rem;
+}
+
+.title-cross {
+  height: 3.5rem; /* Adjust size to match your font */
+  /* This CSS filter will re-color a black image to match our gold accent */
+  filter: invert(75%) sepia(58%) saturate(457%) hue-rotate(357deg) brightness(90%) contrast(86%);
+  order: 2; /* Ensure image is below the text when stacked */
+}
+
+.title-font {
+  font-family: "Cinzel", serif;
+  font-weight: 700; /* Adjust weight as needed */
+  letter-spacing: 0.1em; /* Adds a little breathing room */
+  color: var(--accent-gold);
+  /* Use clamp for a fluid font size that adapts to the viewport */
+  font-size: clamp(2rem, 10vw, 3rem);
+  /* Remove margin from h1/span to work with flexbox */
+  margin: 0;
+  padding: 0;
+  /* Prevent the text from shrinking and breaking in a flex container */
+  flex-shrink: 0; /* Prevent text from shrinking horizontally */
+  order: 1; /* Ensure text is above the image when stacked */
+}
+
+.subtitle-font {
+  font-family: "Cinzel", serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--accent-gold);
+  
+}
+
+h2 {
+  font-weight: 300;
+}
+
+a {
+  color: var(--accent-gold);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--text-light);
+}
+
+button {
+  background-color: white;
+  color: var(--button-text-dark);
+  border: 2px solid var(--accent-gold);
+  border-radius: 50px; /* Fully rounded corners */
+  padding: 12px 28px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--accent-gold);
+  color: white;
+}
+
+.layout-container {
+  width: 100%;
+  max-width: 1280px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto; /* Center the main layout container */
+}
+.content-wrap {
+  flex: 1;
+}
+
+.app-header {
+  width: 100%;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+  border-bottom: 1px solid var(--accent-gold);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between; /* Align title left, nav right */
+  align-items: center;
+}
+
+.app-header a {
+  font-size: 1.1rem;
+}
+
+.app-header button {
+  padding: 8px 20px;
+  font-size: 0.9rem;
+}
+
+.app-header .active-link {
+  color: var(--text-light);
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* This adds spacing between nav links on desktop */
+}
+
+.mobile-menu-toggle {
+  display: none; /* Hidden on desktop */
+}
+
+.verse-container {
+  margin-top: 4rem;
+  padding: 2rem;
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.verse-text {
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+}
+
+.verse-reference {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--accent-gold);
+}
+
+.verse-actions {
+  margin-top: 1.5rem;
+}
+
+.verse-actions button:disabled {
+  background-color: #555;
+  border-color: #777;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.profile-header {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.profile-picture-container {
+  position: relative;
+  width: 108px; /* A bit larger than the image */
+  height: 108px;
+  border-radius: 50%;
+  margin: 0 auto 1rem; /* Center it and give some space below */
+  padding: 4px; /* This creates the space for the border */
+  display: flex; /* Use flex to center the image */
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Hide parts of the gradient that go outside the circle */
+}
+
+.profile-picture-container::before {
+  content: '';
+  position: absolute;
+  top: -2px; /* Adjust to ensure the gradient covers the full border area */
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: conic-gradient(from 0deg, var(--accent-gold), #fff, var(--accent-gold));
+  border-radius: 50%;
+  animation: rotate-border 4s linear infinite;
+  z-index: 0; /* Ensure it's behind the image */
+}
+
+
+
+@keyframes rotate-border {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block; /* Ensure it behaves as a block element */
+  border: 2px solid var(--background-dark); /* Creates separation from the gradient/container */
+  z-index: 1; /* Ensure the image is on top of the rotating border */
+}
+
+.profile-info {
+  font-style: italic;
+  color: #ccc;
+  margin-bottom: 3rem;
+  padding: 1rem 1.5rem;
+  border-left: 3px solid var(--accent-gold);
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 0 8px 8px 0;
+  text-align: left;
+}
+
+.saved-verses-section {
+  margin-top: 4rem;
+  text-align: left;
+}
+
+.saved-verses-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.saved-verse-item {
+  padding: 1.5rem;
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.saved-verse-item .verse-text {
+  font-size: 1.1rem;
+}
+
+.saved-verse-item .verse-actions {
+  text-align: right;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.delete-button {
+  background-color: transparent;
+  color: var(--text-light);
+  border-color: #888;
+  padding: 6px 16px;
+  font-size: 0.8rem;
+  text-transform: none;
+  letter-spacing: 0.5px;
+}
+
+.confirm-delete-button {
+  background-color: #c70000; /* A strong red for confirmation */
+  color: white;
+  border-color: #c70000;
+}
+
+.confirm-delete-button:hover {
+  background-color: #a30000;
+  border-color: #a30000;
+}
+
+.approve-button {
+  background-color: #006400; /* Dark green */
+  color: white;
+  border-color: #006400;
+}
+
+.approve-button:hover {
+  background-color: #008000; /* A slightly lighter green on hover */
+  border-color: #008000;
+}
+
+.confirmation-modal {
+  max-width: 450px;
+}
+
+.confirmation-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.bible-selector-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.bible-select {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+}
+
+.bible-text-container {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.bible-text-container h3 {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  margin-bottom: 2rem;
+}
+
+.verses-display p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.verse-number {
+  color: var(--accent-gold);
+  font-size: 0.8em;
+  margin-right: 0.5em;
+  position: relative;
+  top: -0.5em;
+}
+
+.verse-content {
+  color: var(--text-light);
+}
+
+.error-message {
+  color: #ff8a80; /* A soft red for errors */
+  text-align: center;
+}
+
+.bible-search-form {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.bible-search-input {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  border: 1px solid var(--accent-gold);
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+@media (max-width: 480px) { /* For very small screens, stack search elements */
+  .bible-search-form {
+    flex-direction: column;
+  }
+}
+
+.bible-search-form button {
+  flex-shrink: 0; /* Prevents button from shrinking */
+}
+
+.verse-item {
+  cursor: pointer;
+}
+.verse-item:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.page-description {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #aaa;
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
+.chapter-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  border-top: 1px solid var(--accent-gold);
+  padding-top: 2rem;
+}
+
+.chapter-navigation button {
+  background-color: transparent;
+  color: var(--accent-gold);
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateY(20px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+}
+
+.toast-notification {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--accent-gold);
+  color: var(--button-text-dark);
+  padding: 1rem 2rem;
+  border-radius: 50px;
+  font-weight: 700;
+  z-index: 1000;
+  animation: fadeInOut 2s ease-in-out forwards;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background-color: var(--background-dark);
+  padding: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--accent-gold);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--accent-gold);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-body {
+  overflow-y: auto;
+  text-align: left;
+}
+
+.modal-body .verse-reference {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+.note-textarea {
+  width: 100%;
+  min-height: 80px;
+  margin-top: 1.5rem;
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.saved-note {
+  font-style: italic;
+  color: #ccc;
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent-gold);
+  white-space: pre-wrap; /* Preserves line breaks from the textarea */
+}
+
+.cross-ref-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.cross-ref-item {
+  /* Inherit button styles but make them smaller */
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--text-light);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  text-transform: none;
+}
+
+.modal-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--accent-gold);
+  text-align: right;
+}
+
+.quiz-container {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.score-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+
+.question-section {
+  margin-bottom: 2rem;
+}
+
+.question-count {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #aaa;
+}
+
+.question-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+.answer-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.answer-section button {
+  width: 100%;
+}
+
+.last-studied-verse {
+  color: var(--accent-gold);
+  font-weight: bold;
+}
+
+.last-studied-verse:hover {
+  text-decoration: underline;
+}
+
+.text-page-container {
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.text-section {
+  margin-bottom: 2.5rem;
+}
+
+.text-section h4 {
+  font-family: 'Cinzel', serif;
+  border-bottom: 1px solid var(--accent-gold);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.fact-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  opacity: 0.8;
+}
+
+.fact-image + figcaption {
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #aaa;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.developer-info {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+  background-color: rgba(255, 255, 255, 0.03);
+  padding: 1rem;
+  border-left: 3px solid var(--accent-gold);
+}
+
+.developer-photo {
+  width: 110px;
+  height: 129px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+figure {
+  margin: 0; /* Reset default figure margins */
+}
+
+.prayer-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.form-success-message {
+  color: var(--accent-gold);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.prayer-request-note {
+  font-style: italic;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-top: -0.5rem; /* Bring it a little closer to the text above */
+}
+
+.prayer-requests-section {
+  margin-top: 4rem;
+  text-align: left;
+}
+
+.prayer-requests-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.prayer-request-item {
+  padding: 1.5rem;
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.prayer-request-text {
+  font-size: 1.1rem;
+  font-style: italic;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.prayer-request-actions {
+  text-align: right;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.media-section {
+  margin-bottom: 2.5rem;
+}
+
+.media-section h4 {
+  font-family: 'Cinzel', serif;
+  border-bottom: 1px solid var(--accent-gold);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.video-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+  background: #000;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.blog-posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.blog-post-summary {
+  text-align: left;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  padding-bottom: 2rem;
+}
+
+.blog-post-summary h2 {
+  font-family: 'Cinzel', serif;
+  margin-top: 0;
+}
+
+.post-meta {
+  font-size: 0.9rem;
+  color: #aaa;
+  font-style: italic;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+}
+
+.read-more-button {
+  background-color: transparent;
+  color: var(--accent-gold);
+}
+
+.read-more-button:hover {
+  color: var(--text-light);
+}
+
+.blog-post-full .title-font {
+  font-size: clamp(1.8rem, 8vw, 2.5rem);
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.blog-post-content {
+  margin-top: 2rem;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  white-space: pre-wrap; /* This makes sure your line breaks are respected */
+}
+
+.back-to-blog-link {
+  font-size: 0.9rem;
+  color: #aaa;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.post-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.edit-link, .delete-link {
+  font-size: 0.9rem;
+  color: #aaa;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.add-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: var(--accent-gold);
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: 1px solid var(--accent-gold);
+}
+
+/* Spinner Styles */
+.spinner-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 4rem 0; /* Give it some vertical space */
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate-spinner 1.5s linear infinite;
+}
+
+.spinner::before,
+.spinner::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 5px solid transparent;
+}
+
+.spinner::before {
+  border-top-color: var(--accent-gold);
+  border-bottom-color: var(--accent-gold);
+}
+
+.spinner::after {
+  border-left-color: #fff;
+  border-right-color: #fff;
+  animation: rotate-spinner 0.75s ease-in-out infinite reverse;
+}
+
+@keyframes rotate-spinner { to { transform: rotate(360deg); } }
+
+.comments-section {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--accent-gold);
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.comment-form textarea {
+  width: 100%;
+  min-height: 80px;
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.comment-form button {
+  align-self: flex-end;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.comment-item {
+  display: flex;
+  gap: 1rem;
+  text-align: left;
+  position: relative;
+}
+
+.comment-author-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.comment-content {
+  flex-grow: 1;
+}
+
+.comment-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.comment-author-name {
+  font-weight: bold;
+  color: var(--text-light);
+}
+
+.comment-date {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+
+.comment-text {
+  margin: 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.delete-comment-button {
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.app-footer {
+  width: 100%;
+  padding: 2rem;
+  margin-top: 4rem; /* Give space above the footer */
+  border-top: 1px solid var(--accent-gold);
+  box-sizing: border-box;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap; /* Allow links to wrap on smaller screens */
+  justify-content: center;
+}
+
+.footer-copyright {
+  font-size: 0.9rem;
+  color: #aaa;
+}
+
+.footer-copyright p {
+  margin: 0.5rem 0;
+}
+@media (max-width: 600px) {
+  .video-container {
+    /* We will use a standard 16:9 aspect ratio for consistency */
+    padding-bottom: 56.25%;
+  }
+}
+
+/* General Mobile Styles */
+@media (max-width: 768px) {
+  body {
+    padding: 0 0.5rem; /* Add small, consistent horizontal padding to the entire body */
+  }
+
+  .mobile-menu-toggle {
+    display: block; /* Show hamburger on mobile */
+    z-index: 1100; /* Ensure it's on top of other content */
+  }
+
+  .app-header {
+    justify-content: flex-end; /* Align hamburger to the right */
+    padding: 1rem;
+  }
+
+  .main-nav {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen */
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: var(--background-dark);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    transition: right 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    border-left: 1px solid var(--accent-gold);
+  }
+
+  .main-nav.open {
+    right: 0; /* Slide in */
+  }
+
+  .nav-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 999; /* Below the nav menu, but above everything else */
+    backdrop-filter: blur(2px); /* Optional: adds a nice blur effect */
+    -webkit-backdrop-filter: blur(2px);
+  }
+
+  .hamburger-icon {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+  }
+
+  .hamburger-icon span {
+    width: 2rem;
+    height: 3px;
+    background: var(--accent-gold);
+    border-radius: 10px;
+    transition: all 0.3s linear;
+    position: relative;
+    transform-origin: 1px;
+  }
+
+  .hamburger-icon.open span:nth-child(1) { transform: rotate(45deg); }
+  .hamburger-icon.open span:nth-child(2) { opacity: 0; transform: translateX(20px); }
+  .hamburger-icon.open span:nth-child(3) { transform: rotate(-45deg);
+  }
+
+  .answer-section {
+    /* Stack quiz answers in a single column */
+    grid-template-columns: 1fr;
+  }
+
+  .verse-container,
+  .profile-header,
+  .quiz-container {
+    /* Adjust padding to respect body padding, no extra horizontal padding here */
+    padding: 1.5rem 0;
+  }
+
+  .profile-info,
+  .saved-verse-item,
+  .prayer-request-item {
+    /* Remove horizontal padding from these items as well */
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .title-font {
+    /* Reduce letter spacing on small screens to help prevent overflow */
+    letter-spacing: 0.05em;
+  }
+
+  .title-container {
+    /* Stack the title and cross image vertically on mobile */
+    flex-direction: column;
+  }
+}
+
+.game-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.game-card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.game-card h3 {
+  font-family: 'Cinzel', serif;
+  margin-top: 0;
+}
+
+.game-card p {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.crossword-container {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.crossword-grid {
+  display: grid;
+}
+
+.crossword-cell {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #444;
+  position: relative;
+}
+
+.clue-number {
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  font-size: 0.7rem;
+  color: #555;
+  font-weight: bold;
+}
+
+.cell-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--button-text-dark);
+  text-transform: uppercase;
+  padding: 0;
+  font-family: 'Cinzel', serif;
+}
+
+.cell-input:focus {
+  outline: 2px solid var(--accent-gold);
+  background-color: #fff;
+}
+
+.clue-lists {
+  text-align: left;
+  max-width: 400px;
+}
+
+.clue-list h3 {
+  margin-top: 0;
+}
+
+.clue-item {
+  font-size: 0.9rem;
+}
+
+.trivia-container {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+.trivia-feedback {
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--accent-gold);
+  text-align: center;
+}
