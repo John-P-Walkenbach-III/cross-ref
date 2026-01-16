@@ -24,6 +24,7 @@ import Games from './pages/Games';
 import BibleQuiz from './pages/games/play/BibleQuiz';
 import FillInTheBlank from './pages/games/play/FillInTheBlank';
 import ChatRoom from './pages/ChatRoom';
+import BibleWordle from './pages/games/play/BibleWordle';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -74,6 +75,7 @@ function App() {
             <Route path="/games/play/bible-quiz" element={<BibleQuiz />} />
             <Route path="/games/play/fill-in-the-blank" element={<FillInTheBlank />} />
             <Route path="/chat" element={<ChatRoom user={user} />} />
+             <Route path="/games/play/bible-wordle" element={<BibleWordle />} />
 
           </Route>
 

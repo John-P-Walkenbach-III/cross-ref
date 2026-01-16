@@ -22,6 +22,13 @@ function Games() {
             <button>Play Now</button>
           </Link>
         </div>
+        <div className="game-card">
+          <h3>Bible Wordle</h3>
+          <p>Guess the 5-letter Bible word. Gold tiles mean you're spot on!</p>
+          <Link to="/games/play/bible-wordle">
+            <button>Play Now</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

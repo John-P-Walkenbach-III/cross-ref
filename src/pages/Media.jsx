@@ -39,6 +39,10 @@ const videoData = [
     title: 'A Powerful Morning Prayer You Need Today',
     src: 'https://www.youtube.com/embed/tAuATPi5NVU',
   },
+  {
+    title: "The Eternal Dashboard",
+    src: "/Heavens-Dashboard.png",
+  },
 ];
 
 
@@ -46,6 +50,7 @@ const videoData = [
 
 function Media() {
   const [loadedVideos, setLoadedVideos] = useState(0);
+  const [selectedImage, setSelectedImage] = useState(null);
   const totalVideos = videoData.length; // Total is now dynamic
 
   const handleVideoLoad = () => {
@@ -53,10 +58,30 @@ function Media() {
   };
 
   const allVideosLoaded = loadedVideos >= totalVideos;
+  const isImage = (src) => /\.(png|jpe?g|gif|webp)$/i.test(src);
 
   return (
     <div className="text-page-container">
       {!allVideosLoaded && <Spinner message="Loading media..." />}
+
+      {selectedImage && (
+        <div className="modal-backdrop" onClick={() => setSelectedImage(null)} style={{ zIndex: 3000 }}>
+          <div style={{ position: 'relative', maxWidth: '90%', maxHeight: '90%' }} onClick={(e) => e.stopPropagation()}>
+            <button
+              className="close-button"
+              onClick={() => setSelectedImage(null)}
+              style={{ position: 'absolute', top: '-40px', right: 0, color: '#fff' }}
+            >
+              &times;
+            </button>
+            <img
+              src={selectedImage}
+              alt="Full Size"
+              style={{ maxWidth: '100%', maxHeight: '85vh', border: '2px solid var(--accent-gold)', borderRadius: '8px' }}
+            />
+          </div>
+        </div>
+      )}
 
       <div style={{ visibility: allVideosLoaded ? 'visible' : 'hidden' }}>
         <h2 className="subtitle-font">Media</h2>
@@ -64,14 +89,32 @@ function Media() {
           <div key={video.title} className="media-section">
             <h4>{video.title}</h4>
             <div className="video-container">
-              <iframe
-                onLoad={handleVideoLoad}
-                src={video.src}
-                title={video.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
+              {isImage(video.src) ? (
+                <img
+                  src={video.src}
+                  alt={video.title}
+                  onLoad={handleVideoLoad}
+                  onClick={() => setSelectedImage(video.src)}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    cursor: 'pointer',
+                  }}
+                />
+              ) : (
+                <iframe
+                  onLoad={handleVideoLoad}
+                  src={video.src}
+                  title={video.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              )}
             </div>
           </div>
         ))}

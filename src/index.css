@@ -739,16 +739,32 @@ figure {
 }
 
 .blog-posts-list {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 2rem;
   margin-top: 3rem;
 }
 
 .blog-post-summary {
   text-align: left;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-  padding-bottom: 2rem;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 15px;
+  padding: 2rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(212, 175, 55, 0.05));
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.05);
+  position: relative;
+}
+
+.blog-post-summary:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-gold);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(212, 175, 55, 0.1));
 }
 
 .blog-post-summary h2 {
@@ -806,6 +822,7 @@ figure {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  flex-wrap: wrap;
 }
 
 .edit-link, .delete-link {
@@ -814,6 +831,10 @@ figure {
   background: none;
   border: none;
   padding: 0;
+}
+
+.blog-container {
+  max-width: 1000px;
 }
 
 .add-post-form {
@@ -1229,3 +1250,196 @@ figure {
   color: var(--accent-gold);
   text-align: center;
 }
+
+.prayers-page {
+  max-width: 1200px;
+}
+
+.prayers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.prayer-card {
+  text-align: left;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 15px;
+  padding: 2rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(212, 175, 55, 0.05));
+  backdrop-filter: blur(4px);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 0 15px rgba(212, 175, 55, 0.05);
+  position: relative;
+}
+
+.prayer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 0 25px rgba(212, 175, 55, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.05);
+  border-color: var(--accent-gold);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(212, 175, 55, 0.1));
+}
+
+.prayer-card h4 {
+  font-family: 'Cinzel', serif;
+  border-bottom: 1px solid var(--accent-gold);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.full-width-card {
+  margin-bottom: 2rem;
+}
+
+/* Wordle Styles */
+.wordle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wordle-grid {
+  display: grid;
+  grid-template-rows: repeat(6, 1fr);
+  gap: 5px;
+  margin: 2rem 0;
+}
+
+.wordle-legend {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.wordle-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}
+
+.wordle-tile {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Lato', sans-serif;
+  color: var(--text-light);
+}
+
+.wordle-tile.active {
+  border-color: var(--accent-gold);
+}
+
+.wordle-tile.correct {
+  background-color: var(--accent-gold);
+  color: var(--button-text-dark);
+  border-color: var(--accent-gold);
+}
+
+.wordle-tile.present {
+  background-color: #fff;
+  color: #000;
+  border-color: #fff;
+}
+
+.wordle-tile.absent {
+  background-color: #555;
+  border-color: #555;
+}
+
+.wordle-keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 500px;
+}
+
+.keyboard-row {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.keyboard-key {
+  background-color: #818384;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+  height: 58px;
+  min-width: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.2rem;
+  user-select: none;
+}
+
+.keyboard-key.wide {
+  flex: 1.5;
+  font-size: 0.9rem;
+}
+
+.keyboard-key.correct {
+  background-color: var(--accent-gold);
+  color: var(--button-text-dark);
+}
+
+.keyboard-key.present {
+  background-color: #fff;
+  color: #000;
+}
+
+.keyboard-key.absent {
+  background-color: #3a3a3c;
+  opacity: 0.5;
+}
+
+.wordle-modal {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--accent-gold);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin-top: 1rem;
+  animation: fadeInOut 0.5s ease-in;
+}
+
+.wordle-verse {
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.legend-dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  border: 1px solid #777;
+}
+
+.legend-dot.correct { background-color: var(--accent-gold); border-color: var(--accent-gold); }
+.legend-dot.present { background-color: #fff; border-color: #fff; }
+.legend-dot.absent { background-color: #555; border-color: #555; }

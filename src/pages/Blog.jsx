@@ -25,7 +25,6 @@ function Blog({ userProfile }) {
     }
   };
 
-
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -72,7 +71,7 @@ function Blog({ userProfile }) {
         </div>
       )}
 
-      <div className="blog-posts-list">
+      <div className="blog-posts-list ">
         {error && <p className="error-message">{error}</p>}
         {!loading && posts.length === 0 && !error && <p>No blog posts have been added yet. Please check back soon!</p>}
         {posts.map(post => (
