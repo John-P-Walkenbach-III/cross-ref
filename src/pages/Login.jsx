@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from '../firebase/firebase.js';
 import crossImage from '../assets/cross.png'; // Make sure this path is correct
@@ -7,6 +7,8 @@ import Spinner from '../components/Spinner.jsx';
 
 function Login({ user }) {
   const [isSigningIn, setIsSigningIn] = useState(false);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleGoogleSignIn = async () => {
     setIsSigningIn(true);
@@ -24,7 +26,7 @@ function Login({ user }) {
 
   // If user is already logged in, redirect to home page
   if (user) {
-    return <Navigate to="/" />;
+    return <Navigate to={from} replace />;
   }
 
   return (

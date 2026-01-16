@@ -25,10 +25,12 @@ import BibleQuiz from './pages/games/play/BibleQuiz';
 import FillInTheBlank from './pages/games/play/FillInTheBlank';
 import ChatRoom from './pages/ChatRoom';
 import BibleWordle from './pages/games/play/BibleWordle';
+import Spinner from './components/Spinner';
 
 function App() {
   const [user, setUser] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -52,9 +54,14 @@ function App() {
         }
       }
       setUser(currentUser);
+      setAuthLoading(false);
     });
     return () => unsubscribe(); // Cleanup on unmount
   }, []);
+
+  if (authLoading) {
+    return <Spinner message="Loading..." />;
+  }
 
   return (
     <div>
